@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestContainerTransporta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerTransport.Logic", "ContainerTransport.Logic\ContainerTransport.Logic.csproj", "{86CC35E0-2948-44F6-9AB9-BB537CFCA84F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerTransport.Models", "ContainerTransport.Models\ContainerTransport.Models.csproj", "{346147F7-82BE-491E-9893-D6E73434585A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{86CC35E0-2948-44F6-9AB9-BB537CFCA84F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86CC35E0-2948-44F6-9AB9-BB537CFCA84F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86CC35E0-2948-44F6-9AB9-BB537CFCA84F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{346147F7-82BE-491E-9893-D6E73434585A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{346147F7-82BE-491E-9893-D6E73434585A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{346147F7-82BE-491E-9893-D6E73434585A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{346147F7-82BE-491E-9893-D6E73434585A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ContainerTransport.Logic;
+using ContainerTransport.Models;
 
 namespace ContainerTransport
 {
     public partial class FmContainer : Form
     {
-        private Logic logicServices;
+        private ShipAlgorithm logicServices;
 
         public FmContainer()
         {
@@ -24,7 +25,7 @@ namespace ContainerTransport
 
         private void btnSetShip_Click(object sender, EventArgs e)
         {
-            logicServices = new Logic(nbShipWeight.Value);
+            logicServices = new ShipAlgorithm(nbShipWeight.Value);
 
             btnAddContainer.Enabled = true;
             btnStart.Enabled = true;
@@ -46,23 +47,18 @@ namespace ContainerTransport
         {
             var removeIndex = lbContainerList.SelectedIndex;
 
-            try
+            if (removeIndex != -1)
             {
-                if (removeIndex != -1)
-                {
-                    logicServices.RemoveContainer(removeIndex);
+                logicServices.RemoveContainer(removeIndex);
 
-                    lbContainerUpdate();
-                }
-                else
-                {
-                    MessageBox.Show("Please select a container first!");
-                }
+                lbContainerUpdate();
             }
-            catch
+            else
             {
+                MessageBox.Show("Please select a container first!");
             }
         }
+
         private void lbContainerUpdate()
         {
             lbContainerList.Items.Clear();
@@ -76,13 +72,9 @@ namespace ContainerTransport
         private void lbUpdateShipInfo()
         {
             lblTotalContainers.Text = lbContainerList.Items.Count.ToString();
-
-            lblTotalContainerWeight.Text = logicServices.DockedContainersWeight.ToString();
-
+            lblTotalContainerWeight.Text = logicServices.WeightOfDockedContainers.ToString();
             lblShipMaxWeight.Text = logicServices.ship.MaxWeight.ToString();
-
             lblShipMinWeight.Text = (logicServices.ship.MaxWeight / 2).ToString();
-
             lblShipBalance.Text = logicServices.ship.Balance.ToString();
         }
 
@@ -90,7 +82,7 @@ namespace ContainerTransport
         {
             try
             {
-                logicServices.StartAlgoritem();
+                logicServices.StartAlgorithm();
                 SetSelectionList(logicServices.ship);
                 lbUpdateShipInfo();
             }
@@ -103,6 +95,7 @@ namespace ContainerTransport
 
         private void SetSelectionList(Ship ship)
         {
+            #region Clear Listbox
             lbContainerSection1.Items.Clear();
             lbContainerSection2.Items.Clear();
             lbContainerSection3.Items.Clear();
@@ -111,7 +104,9 @@ namespace ContainerTransport
             lbContainerSection6.Items.Clear();
             lbContainerSection7.Items.Clear();
             lbContainerSection8.Items.Clear();
+            #endregion
 
+            #region AddContainerToList
             foreach (var selection in ship.Selections)
             {
                 foreach (Container container in selection.Containers)
@@ -146,6 +141,7 @@ namespace ContainerTransport
 
                 }
             }
+            #endregion
         }
 
         private void btnClearAll_Click(object sender, EventArgs e)

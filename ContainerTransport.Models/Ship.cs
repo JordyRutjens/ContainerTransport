@@ -3,26 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ContainerVervoer.Models;
+using ContainerTransport.Models;
 
-namespace ContainerTransport
+namespace ContainerTransport.Models
 {
     public class Ship
     {
         public decimal MaxWeight { get; private set; }
-
         public decimal MinWeight { get; private set; }
-
         public decimal Balance { get; set; }
-
         public List<Selection> Selections { get; set; } = new List<Selection>();
-
 
         public Ship(decimal maxWeight, int totalSelections)
         {
             MaxWeight = maxWeight;
             MinWeight = MaxWeight / 2;
-
             CreateSelections(totalSelections);
         }
 
@@ -89,6 +84,6 @@ namespace ContainerTransport
             }
             return false;
         }
-    
+
     }
 }

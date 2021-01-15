@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ContainerTransport;
+using ContainerTransport.Logic;
+using ContainerTransport.Models;
 
 namespace UnitTestContainerTransportation
 {
     [TestClass]
     public class UTLogic
     {
-        private Logic TestLogic;
+        private ShipAlgorithm TestLogic;
         private List<Container> testContainers = new List<Container>();
         private int _totalValuable;
         private int _totalCooled;
@@ -16,7 +18,29 @@ namespace UnitTestContainerTransportation
         [TestInitialize]
         public void initialize()
         {
-            TestLogic = new Logic(1200000);
+            TestLogic = new ShipAlgorithm(1200000);
+        }
+
+        [TestMethod]
+        public void Check_if_can_add_container()
+        {
+            //add standard container
+            TestLogic.AddContainer(30000, true, false, false);
+
+            Assert.AreEqual(30000, TestLogic.WeightOfDockedContainers);
+        }
+
+        [TestMethod]
+        public void Check_remove_container_from_ship()
+        {
+            //Add container
+            TestLogic.AddContainer(30000, true, false, false);
+
+            TestLogic.WeightOfDockedContainers -= TestLogic.DockedContainers[0].Weight;
+            //Remove container
+            TestLogic.DockedContainers.RemoveAt(0);
+            Assert.AreEqual(0, TestLogic.WeightOfDockedContainers);
+
         }
 
         //test if minimum weight is matched
@@ -34,8 +58,7 @@ namespace UnitTestContainerTransportation
 
                     TestLogic.AddContainer(Weight, Standard, Valuable, Cooled);
                 }
-
-                TestLogic.StartAlgoritem();
+                TestLogic.StartAlgorithm();
             }
             catch (ExceptionHandler e)
             {
@@ -46,7 +69,7 @@ namespace UnitTestContainerTransportation
 
         //test if maximum weight is matched
         [TestMethod]
-        public void check_maximum_weight_on_ship()
+        public void Check_maximum_weight_on_ship()
         {
             try
             {
@@ -56,12 +79,10 @@ namespace UnitTestContainerTransportation
                     decimal Weight = 30000;
                     bool Standard = true;
                     bool Valuable = false;
-                    bool Cooled = false; 
-
+                    bool Cooled = false;
                     TestLogic.AddContainer(Weight, Standard, Valuable, Cooled);
                 }
-
-                TestLogic.StartAlgoritem();
+                TestLogic.StartAlgorithm();
             }
             catch (ExceptionHandler e)
             {
@@ -72,7 +93,7 @@ namespace UnitTestContainerTransportation
 
         //test if maximum valuable containers is matched
         [TestMethod]
-        public void check_valuable_containers_maximum_on_ship()
+        public void Check_valuable_containers_maximum_on_ship()
         {
             try
             {
@@ -98,7 +119,7 @@ namespace UnitTestContainerTransportation
                     TestLogic.AddContainer(Weight, Standard, Valuable, Cooled);
                 }
 
-                TestLogic.StartAlgoritem();
+                TestLogic.StartAlgorithm();
             }
             catch (ExceptionHandler e)
             {
@@ -112,7 +133,7 @@ namespace UnitTestContainerTransportation
 
         //test if maximum cooled containers is matched
         [TestMethod]
-        public void check_cooled_maximum_on_ship()
+        public void Check_cooled_maximum_on_ship()
         {
             try
             {
@@ -148,8 +169,7 @@ namespace UnitTestContainerTransportation
 
                     TestLogic.AddContainer(Weight, Standard, Valuable, Cooled);
                 }
-
-                TestLogic.StartAlgoritem();
+                TestLogic.StartAlgorithm();
             }
             catch (ExceptionHandler e)
             {

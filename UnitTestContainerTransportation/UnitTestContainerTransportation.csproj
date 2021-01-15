@@ -55,6 +55,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ContainerTransport.Logic\ContainerTransport.Logic.csproj">
+      <Project>{86cc35e0-2948-44f6-9ab9-bb537cfca84f}</Project>
+      <Name>ContainerTransport.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContainerTransport.Models\ContainerTransport.Models.csproj">
+      <Project>{346147f7-82be-491e-9893-d6e73434585a}</Project>
+      <Name>ContainerTransport.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ContainerVervoer\ContainerTransport.csproj">
       <Project>{e146971c-2493-4028-bc33-3237b0c6f774}</Project>
       <Name>ContainerTransport</Name>
